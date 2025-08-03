@@ -1,7 +1,5 @@
 Routinier
 
-Perfect, Savo — here’s your finalized text for the Google Play listing, ready to be copy-pasted when you publish:
-
 ---
 
 ### 📌 **Short Description**
@@ -30,6 +28,3 @@ Perfect, Savo — here’s your finalized text for the Google Play listing, read
 > **Created by an independent developer who needed a tool like this — and decided to share it.**
 
 ---
-
-Would you like me to help generate the **privacy policy** next, or prepare your screenshots into upload-ready frames?
-
