@@ -1,30 +1,26 @@
-# 🗓️ Daily Routine Tracker
+# Routinier 🗓️
 
-This is a simple, phone-friendly daily checklist app built with HTML, CSS, and JavaScript.
+**Routinier** is a minimalist daily routine tracker, built to help create structure, focus, and consistency in life.  
+It’s perfect for developers, creatives, and anyone designing a better day.
 
-## ✅ Features
-- Check off daily tasks like training, drawing, writing, coding, etc.
-- Saves your progress in `localStorage`
-- Reset button to start fresh each morning
-- Designed to work great on mobile devices
-- Can be deployed to Netlify or added to your phone home screen
+🔗 [Live Demo](https://daily-routine-checker.netlify.app)
 
-## 🧱 Tech Stack
-- HTML5
-- CSS3
-- JavaScript (vanilla)
-- localStorage API
+---
 
-## 🌐 Deployment
-Can be hosted on:
-- GitHub Pages
-- Netlify
-- Or opened directly from your phone as a bookmark or PWA
+## ✨ Features
+- ✅ Add, edit, and delete routine tasks
+- ✅ Works offline (PWA)
+- ✅ Mobile-optimized
 
-## 📁 File Structure
-- `index.html` – Main HTML app
-- `.gitignore` – Ignore unnecessary files
-- `README.md` – Project info
+## 🛠️ Built With
+- HTML  
+- CSS  
+- JavaScript  
+- Hosted on Netlify  
 
-## 🚀 Author
-Made by Savo Kordes – 2025
+## 📸 Screenshot  
+![Screenshot](screenshot.png)
+
+---
+
+Built with care by **[Your Name or Pseudonym]** — redesigning life, one habit at a time.
