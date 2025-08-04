@@ -23,4 +23,4 @@ It’s perfect for developers, creatives, and anyone designing a better day.
 
 ---
 
-Built with care by **[Savo Kordes]** — redesigning life, one habit at a time.
+Built with care by **Savo Kordes** — redesigning life, one habit at a time.
