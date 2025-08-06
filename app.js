@@ -1,36 +1,30 @@
-
-const STORAGE_KEY = "routineTasks";
+const TASKS_KEY = "routineTasks";
 let tasks = {};
 
-// Load everything when the page is ready
-window.addEventListener("DOMContentLoaded", initApp);
-
-function initApp() {
+window.addEventListener("DOMContentLoaded", () => {
   loadTasks();
-  setupResetButton();
-}
+});
 
-// Add a new task
-function addTask(text = "", checked = false, id = null) {
-  const taskId = id || "task-" + Date.now();
+function addTask(taskText = "", checked = false, taskId = null) {
+  taskId = taskId || "task-" + Date.now();
+
   const li = document.createElement("li");
-
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
-  checkbox.checked = checked;
   checkbox.id = taskId;
+  checkbox.checked = checked;
 
   const label = document.createElement("label");
   label.htmlFor = taskId;
-  label.textContent = text;
+  label.textContent = taskText;
 
   const deleteBtn = document.createElement("button");
   deleteBtn.textContent = "🗑️";
-  deleteBtn.style.marginLeft = "auto";
+  deleteBtn.style.marginLeft = "10px";
   deleteBtn.onclick = () => {
+    li.remove();
     delete tasks[taskId];
     saveTasks();
-    li.remove();
   };
 
   checkbox.addEventListener("change", () => {
@@ -41,21 +35,27 @@ function addTask(text = "", checked = false, id = null) {
   li.appendChild(checkbox);
   li.appendChild(label);
   li.appendChild(deleteBtn);
-
   document.getElementById("routineList").appendChild(li);
 
-  tasks[taskId] = { text, checked };
+  tasks[taskId] = { text: taskText, checked };
   saveTasks();
 }
 
-// Save to localStorage
-function saveTasks() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+function handleAddTaskFromInput() {
+  const input = document.getElementById("taskInput");
+  const taskText = input.value.trim();
+  if (taskText === "") return;
+
+  addTask(taskText);
+  input.value = "";
 }
 
-// Load from localStorage
+function saveTasks() {
+  localStorage.setItem(TASKS_KEY, JSON.stringify(tasks));
+}
+
 function loadTasks() {
-  const saved = localStorage.getItem(STORAGE_KEY);
+  const saved = localStorage.getItem(TASKS_KEY);
   if (!saved) return;
   tasks = JSON.parse(saved);
   Object.entries(tasks).forEach(([id, task]) => {
@@ -63,20 +63,22 @@ function loadTasks() {
   });
 }
 
-// Handle input and add
-function handleAddTask() {
-  const input = document.getElementById("taskInput");
-  const taskText = input.value.trim();
-  if (taskText === "") return;
-  addTask(taskText);
-  input.value = "";
-}
+document.getElementById("reset-btn")?.addEventListener("click", () => {
+  localStorage.removeItem(TASKS_KEY);
+  tasks = {};
+  const routineList = document.getElementById("routineList");
+  routineList.innerHTML = "";
+});
 
-// Reset everything
-function setupResetButton() {
-  document.getElementById("resetBtn").addEventListener("click", () => {
-    tasks = {};
-    saveTasks();
-    document.getElementById("routineList").innerHTML = "";
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js").then(reg => {
+    console.log("Service Worker registered:", reg.scope);
+    if (reg.waiting) {
+      reg.waiting.postMessage({ type: "SKIP_WAITING" });
+    }
+  }).catch(err => console.error("SW registration failed:", err));
+
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    window.location.reload();
   });
 }
